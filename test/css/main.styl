@@ -1,0 +1,297 @@
+white = #fff
+gray = #b3beca
+darkBlue = #002650
+liteBlue = #3b58a7
+darkRed = #7b3b56
+
+/* Some reset styles */
+html 
+  height 100%
+
+body
+  min-height 100%
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary
+  letter-spacing 0.5px
+  font-family 'Roboto Regular', sans-serif
+  font-size 100%
+  font-weight normal
+  vertical-align baseline
+  background transparent
+  margin 0
+  padding 0
+  border none
+
+*
+  box-sizing: border-box
+  &:before,
+  &:after
+	  box-sizing: inherit
+
+main, article, aside, figure, footer, header, nav, section, details, summary
+  display block
+
+html
+	box-sizing border-box
+
+header
+  padding 5% 0
+  width 100%
+  @media screen and (orientation portrait)
+    padding 15% 0
+
+/* Body background */
+body
+  background linear-gradient(darkBlue, liteBlue)
+  background -webkit-linear-gradient(darkBlue, liteBlue)
+  background -moz-linear-gradient(darkBlue, liteBlue)
+  background-attachment fixed
+  color white
+
+img
+  max-width 100%
+  height auto
+  display inherit
+
+object,
+embed
+  max-width 100%
+
+input
+  color white
+
+::placeholder /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color white
+  opacity 1 /* Firefox */
+
+:-ms-input-placeholder /* Internet Explorer 10-11 */
+  color white
+
+::-ms-input-placeholder /* Microsoft Edge */
+  color white
+
+/* Fonts */
+@font-face
+  font-family 'Roboto Bold', sans-serif
+  src url '../fonts/Roboto-Bold.ttf'
+  font-weight 600
+  font-style normal
+
+@font-face
+  font-family 'Roboto Regular', sans-serif
+  src url '../fonts/Roboto-Regular.ttf'
+  font-weight 300
+  font-style normal
+
+/*
+ *  Gabriela's stylus styles.
+ */
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  {prop} args
+
+border-radius()
+  vendor('border-radius', arguments)
+  
+/* Search-box */
+.input-wrapper
+  padding-left 35px
+  position relative
+  z-index 2
+  &:hover,
+  &:focus
+    background rgba(255,255,255,0.2)
+    outline 3px solid #e5a242
+  @media screen and (orientation portrait)
+    padding 5%
+    padding-left 47px
+
+#user-input
+  margin 0px
+  padding 2% 35px
+  border none 
+  border-radius 10px
+  box-sizing border-box
+  background url(../images/search.svg)
+  background-attachment scroll
+  background-repeat no-repeat
+  background-position left center
+  background-clip border-box
+  background-size 31px
+  width 100%
+  font-size 31px
+  &:hover
+    outline none
+  &:focus
+    outline 3px dotted #e5a242
+  @media screen and (orientation portrait)
+    background-size 44px
+    padding 2% 47px
+    font-size 47px
+    
+
+.dropdown
+  width 65%
+  font-size 31px
+  margin 0 auto
+  left 17.5%
+  right 17.5%
+  position relative
+  display inline-block
+  background gray
+  border-radius 10px
+  border-bottom: 1px solid gray
+  @media screen and (orientation portrait)
+    font-size 47px
+    width 80%
+    left 10%
+    right 10% 
+  
+.dropdown-content 
+  padding 0
+  display block
+  overflow hidden
+  background gray
+  width 100%
+  position absolute
+  top 99%
+  z-index 1
+  div.list-element
+    padding 2%
+    &:hover
+    &:focus
+      background rgba(255,255,255,0.2)
+    a
+      color white
+      //font-size 165%
+      text-decoration none
+      background transparent
+      width 100%
+      display inline-block
+      &:hover
+        border none
+      &:focus
+        outline 3px dotted #e5a242
+      //@media screen and (orientation portrait)   
+
+/* Enter log history */
+#enter-log
+  width 65%
+  font-size 31px
+  margin 3% auto
+  background rgba(255,255,255,0.2)
+  @media screen and (orientation portrait)
+    width 100%
+    font-size 47px
+    margin 6% 0
+  &::after
+    clear both
+    float none
+  .log
+    width 100%
+    display inline-block
+    &:first-child
+      margin-top 2%
+    &:last-child
+      margin-bottom 2%
+    &:hover
+      background rgba(255,255,255,0.2)
+      .x-btn
+        background darkRed
+        .red-close
+          display block
+    &::after
+      clear both
+      float none
+    div
+      float left
+    .stamp-wrapper
+      width 91.666%
+      padding 1.45% 0
+      .log-history
+        padding-left 4%
+        @media screen and (orientation portrait)
+          padding-left 16%
+      .log-history,
+      .log-date
+        width 50%
+        text-align left
+      .log-date
+        padding-top 10px
+        font-size 21px
+        @media screen and (orientation portrait)
+          font-size 27px
+          padding-top 20px
+    .x-btn
+      width 8.333%
+      height 0
+      padding-bottom 8.33%
+      background transparent
+      display block
+      position relative
+      .red-close
+        width 35%
+        height 0
+        padding-bottom 35%
+        background white
+        border-radius 100%
+        color darkRed
+        text-align center
+        line-height: 1em;
+        position absolute
+        top 35%
+        left 35%
+        display none
+        cursor pointer
+        font-size 21px
+        line-height 1.3em
+        @media screen and (orientation portrait)
+          font-size 27px
+          line-height: 1em;
+    @media screen and (orientation portarit)
+      &:first-child
+        margin-top 6%
+      &:last-child
+        margin-bottom 6%  
+
+/* Global styles */
+.hide 
+  display none
+
+.show 
+  display block
+
+.space
+  width 1%
+
+.left
+  float left
+
+.right
+  float right
+
+.center
+  margin-left auto
+  margin-right auto
+
+.clear::after
+  content ""
+  clear both
+  display table
+
+.txt-center
+  text-align center
+
+.txt-left
+  text-align left
+ 
+/* Footer */
+footer 
+  position fixed
+  left 0
+  bottom 0
+  width 100%
+  color white
+  h4
+    text-align center
