@@ -1,3 +1,11 @@
+/*
+ * Responsive, simple search dropdown. After two typed letters, shows partial
+ * search reasults in a list blow. Using cryptocurrency public rest API.
+ * Press Enter saves value in below.
+ * Technology: Node, Stylus, JavaScript.
+ * WAI Guidelines for accesibility aplied. 
+ */
+
 (function () {
 
     function startup() {
@@ -13,11 +21,12 @@
         toggleList()
     }) */
 
-    input.addEventListener('click', function(event) {
+    // Used instead
+    input.addEventListener('click', function (event) {
         toggleList()
     })
 
-    input.addEventListener('keyup', function(event) {
+    input.addEventListener('keyup', function (event) {
         searchFunction()
         // Don't display list
         // until user types two letters.
@@ -28,7 +37,7 @@
         }
     })
 
-    list.addEventListener('keydown', function(evet) {
+    list.addEventListener('keydown', function (evet) {
         var target = event.target
 
         // Not finish. 
@@ -50,7 +59,7 @@
             var target = event.target
             var enterLog = document.getElementById('enter-log')
             var selection = target.innerHTML
-            registerEnter(enterLog,selection)
+            registerEnter(enterLog, selection)
             //hideList()
         }
     })
@@ -87,19 +96,38 @@
         // Crypto Currency Public rest API
         var url = 'https://api.coinmarketcap.com/v1/ticker/?limit=10' // Displaying 10 results. Change number for more results
         var list = document.getElementById('cryptoList')
-        fetch(url)
+        /* fetch(url)
             .then(function(resp){return resp.json()}) // Transform the data into json
             .then(function (data) {
                 let eCurrency = data // Get the results
                 return eCurrency.map(function (eCoin) { // Map through the results and for each run the code below
                     var div = createNode('div', 'list-element', '')
-                    var a = createNode('a', 'data', `${eCoin.name} - ${eCoin.symbol}`)
+                    var a = createNode('a', 'data', eCoin.name +' '+ eCoin.symbol)
 
                     a.href = '#'
                     append(div, a) // Append all our elements
                     append(list, div)
                 })
-            })
+            }) */
+        
+        /* IExplorer fixed by replacing fetch for XMLHttpRequest */
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(xhttp.responseText);
+                let eCurrency = response // Get the results
+                eCurrency.map(function (eCoin) { // Map through the results and for each run the code below
+                    var div = createNode('div', 'list-element', '')
+                    var a = createNode('a', 'data', eCoin.name + ' ' + eCoin.symbol)
+
+                    a.href = '#'
+                    append(div, a) // Append all our elements
+                    append(list, div)
+                });
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
 
     }
 
@@ -124,7 +152,7 @@
         }
     }
 
-    function registerEnter(log,reg) {
+    function registerEnter(log, reg) {
         if (log.classList.contains('hide'))
             log.classList.remove('hide');
         timeStamp(log, reg)
@@ -135,15 +163,15 @@
             stamp = null,
             time = clock(),
             spanHistory = createNode('div', 'log-history', history),
-            spanDate = createNode('div', 'log-date', date.toLocaleDateString('sv-SV')+' '+time),
-            log = createNode('div','log','')
-            stampSrapper = createNode('div', 'stamp-wrapper', ''),
+            spanDate = createNode('div', 'log-date', date.toLocaleDateString('sv-SV') + ' ' + time),
+            log = createNode('div', 'log', '')
+        stampWrapper = createNode('div', 'stamp-wrapper', ''),
             xBtn = createNode('div', 'x-btn', ''),
             xCircle = createNode('div', 'red-close', 'x')
-        
-        stampSrapper.append(spanHistory,spanDate)
+
+        stampWrapper.append(spanHistory, spanDate)
         xBtn.append(xCircle)
-        log.append(stampSrapper,xBtn)
+        log.append(stampWrapper, xBtn)
         target.append(log)
     }
 
@@ -167,4 +195,4 @@
     // Set up event listener to run the startup process
     // once loading is complete.
     window.addEventListener('load', startup, false)
-})()
+})();
